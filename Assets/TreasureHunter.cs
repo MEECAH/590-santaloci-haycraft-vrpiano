@@ -155,25 +155,25 @@ public class TreasureHunter : MonoBehaviour
 
         
         // FOLLOWING IS PART OF REDIRECTION ALGORITHM
-        Vector3 YIdentity = new Vector3(0,1,0);
-        howMuchUserRotated=angleBetweenVectors(prevForwardVector,playerCam.transform.forward);
+        // Vector3 YIdentity = new Vector3(0,1,0);
+        // howMuchUserRotated=angleBetweenVectors(prevForwardVector,playerCam.transform.forward);
 
-        directionUserRotated=(d(playerCam.transform.position+prevForwardVector, playerCam.transform.position, playerCam.transform.position + playerCam.transform.forward)<0)?-1:1 ;
-        deltaYawRelativeToCenter=prevYawRelativeToCenter-angleBetweenVectors(playerCam.transform.forward,TrackingSpace.transform.position-playerCam.transform.position);
-        distanceFromCenter=playerCam.transform.localPosition.magnitude;
-        howMuchToAccelerate=(((deltaYawRelativeToCenter<0)? -0.13f: 0.3f) * howMuchUserRotated * directionUserRotated * Mathf.Clamp(distanceFromCenter/longestDimensionOfPE/2,0,1));
-        if(Mathf.Abs(howMuchToAccelerate)>0){
-        TrackingSpace.transform.RotateAround(playerCam.transform.position, YIdentity, howMuchToAccelerate);
-        }
-        prevForwardVector=playerCam.transform.forward;
-        prevYawRelativeToCenter=angleBetweenVectors(playerCam.transform.forward,TrackingSpace.transform.position-playerCam.transform.position);
+        // directionUserRotated=(d(playerCam.transform.position+prevForwardVector, playerCam.transform.position, playerCam.transform.position + playerCam.transform.forward)<0)?-1:1 ;
+        // deltaYawRelativeToCenter=prevYawRelativeToCenter-angleBetweenVectors(playerCam.transform.forward,TrackingSpace.transform.position-playerCam.transform.position);
+        // distanceFromCenter=playerCam.transform.localPosition.magnitude;
+        // howMuchToAccelerate=(((deltaYawRelativeToCenter<0)? -0.13f: 0.3f) * howMuchUserRotated * directionUserRotated * Mathf.Clamp(distanceFromCenter/longestDimensionOfPE/2,0,1));
+        // if(Mathf.Abs(howMuchToAccelerate)>0){
+        // TrackingSpace.transform.RotateAround(playerCam.transform.position, YIdentity, howMuchToAccelerate);
+        // }
+        // prevForwardVector=playerCam.transform.forward;
+        // prevYawRelativeToCenter=angleBetweenVectors(playerCam.transform.forward,TrackingSpace.transform.position-playerCam.transform.position);
         
 
-        //this is for translational gain
-        trajectoryVector = playerCam.transform.position - prevLocation;
-        howMuchToTranslate = trajectoryVector*0.50f;
-        TrackingSpace.transform.position += howMuchToTranslate;
-        prevLocation = playerCam.transform.position;
+        // //this is for translational gain
+        // trajectoryVector = playerCam.transform.position - prevLocation;
+        // howMuchToTranslate = trajectoryVector*0.50f;
+        // TrackingSpace.transform.position += howMuchToTranslate;
+        // prevLocation = playerCam.transform.position;
 
         
         if (OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))

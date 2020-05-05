@@ -91,7 +91,7 @@ public class FirstPersonAIO : MonoBehaviour {
 
     public bool playerCanMove = true;
     public bool walkByDefault = true;
-    public float walkSpeed = 4f;
+    public float walkSpeed = 16f;
     public float sprintSpeed = 8f;
     public float jumpPower = 5f;
     public bool canJump = true;
@@ -795,7 +795,7 @@ public class BETA_SETTINGS{
             t.playerCanMove = EditorGUILayout.ToggleLeft(new GUIContent("Enable Player Movement","Determines if the player is allowed to move."),t.playerCanMove);
             GUI.enabled = t.playerCanMove;
             t.walkByDefault = EditorGUILayout.ToggleLeft(new GUIContent("Walk By Default","Determines if the default mode of movement is 'Walk' or 'Srpint'."),t.walkByDefault);
-            t.walkSpeed = EditorGUILayout.Slider(new GUIContent("Walk Speed","Determines how fast the player walks."),t.walkSpeed,0.1f,10);
+            t.walkSpeed = EditorGUILayout.Slider(new GUIContent("Walk Speed","Determines how fast the player walks."),t.walkSpeed,0.1f,50);
             t.sprintSpeed = EditorGUILayout.Slider(new GUIContent("Sprint Speed","Determines how fast the player sprints."),t.sprintSpeed,0.1f,20);
             t.canJump = EditorGUILayout.ToggleLeft(new GUIContent("Can Player Jump?","Determines if the player is allowed to jump."),t.canJump);
             GUI.enabled = t.playerCanMove && t.canJump; EditorGUI.indentLevel++;
