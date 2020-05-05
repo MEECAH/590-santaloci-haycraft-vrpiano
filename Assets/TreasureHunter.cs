@@ -6,6 +6,8 @@ public enum AttachmentRule { KeepRelative, KeepWorld, SnapToTarget }
 public class TreasureHunter : MonoBehaviour
 {
 
+    AudioSource audioData;
+
     public GameObject charCyl;
     public float totScore = 0;
     public int sphereCount = 0;
@@ -79,10 +81,12 @@ public class TreasureHunter : MonoBehaviour
         prevYawRelativeToCenter=angleBetweenVectors(playerCam.transform.forward,TrackingSpace.transform.position-playerCam.transform.position);
 
         scoreText.transform.LookAt(playerCam.transform);
-        scoreText.text = "Ruth & Micah";
+
 
 
         prevLocation = playerCam.transform.position;
+
+        Cursor.lockState=shouldLockMouse?CursorLockMode.Locked:CursorLockMode.None;
         
     }
     // Update is called once per frame
@@ -91,10 +95,12 @@ public class TreasureHunter : MonoBehaviour
 
     int counter = 0;
 
+    GameObject pickedUpObject;
+
     if(Input.GetMouseButtonDown(0)){
         print("hit 1");
         
-        GameObject pickedUpObject;
+
         RaycastHit outHit;
             if (Physics.Raycast(aerialViewCam.transform.position, aerialViewCam.transform.forward, out outHit, 100.0f)){
 
@@ -106,21 +112,42 @@ public class TreasureHunter : MonoBehaviour
 
             //Destroy(pickedUpObject);
 
+            audioData = pickedUpObject.GetComponent<AudioSource>();
+                    audioData.Play();
+                    print("playing sound"+ pickedUpObject.GetComponent<AudioSource>());
+            
 
+            Vector3 newpos = pickedUpObject.transform.position;
+            print("key:" + pickedUpObject);
+            newpos.y -= .2f; // why does this work while 'transform.position.x += 5.0f;' doesn't?
+            pickedUpObject.transform.position = newpos;
 
-            }
-
-            Debug.Log(" raycast hit ");
-
-            counter++;
-            if(counter>=10){
-                winmsg.text = "you win game over";
             }
 
         }
     }
     if(Input.GetMouseButtonUp(0)){
 
+        RaycastHit outHit;
+            if (Physics.Raycast(aerialViewCam.transform.position, aerialViewCam.transform.forward, out outHit, 100.0f)){
+
+            pickedUpObject=outHit.collider.gameObject;   
+
+            //pickedUpObject.GetComponent<AudioSource>().Stop();
+
+            if(pickedUpObject.tag == "Key"){
+
+            //Destroy(pickedUpObject);
+            
+
+            Vector3 newpos = pickedUpObject.transform.position;
+            print("key:" + pickedUpObject);
+            newpos.y += .2f; // why does this work while 'transform.position.x += 5.0f;' doesn't?
+            pickedUpObject.transform.position = newpos;
+
+            }
+
+        }
     }
 
         
