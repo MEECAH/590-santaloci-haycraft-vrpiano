@@ -102,7 +102,13 @@ public class TreasureHunter : MonoBehaviour
 
             //pickedUpObject.GetComponent<AudioSource>().Stop();
 
-            Destroy(pickedUpObject.transform.parent.gameObject);
+            if(pickedUpObject.tag == "Key"){
+
+            //Destroy(pickedUpObject);
+
+
+
+            }
 
             Debug.Log(" raycast hit ");
 
@@ -112,6 +118,9 @@ public class TreasureHunter : MonoBehaviour
             }
 
         }
+    }
+    if(Input.GetMouseButtonUp(0)){
+
     }
 
         
