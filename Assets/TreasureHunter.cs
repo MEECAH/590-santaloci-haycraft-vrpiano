@@ -8,6 +8,8 @@ public class TreasureHunter : MonoBehaviour
 
     AudioSource audioData;
 
+    public GameObject key = null;
+
     public GameObject charCyl;
     public float totScore = 0;
     public int sphereCount = 0;
@@ -110,6 +112,8 @@ public class TreasureHunter : MonoBehaviour
 
             if(pickedUpObject.tag == "Key"){
 
+            key = pickedUpObject;    
+
             //Destroy(pickedUpObject);
 
             audioData = pickedUpObject.GetComponent<AudioSource>();
@@ -117,10 +121,10 @@ public class TreasureHunter : MonoBehaviour
                     print("playing sound"+ pickedUpObject.GetComponent<AudioSource>());
             
 
-            Vector3 newpos = pickedUpObject.transform.position;
-            print("key:" + pickedUpObject);
+            Vector3 newpos = key.transform.position;
+            print("key:" + key);
             newpos.y -= .2f; // why does this work while 'transform.position.x += 5.0f;' doesn't?
-            pickedUpObject.transform.position = newpos;
+            key.transform.position = newpos;
 
             }
 
@@ -128,26 +132,25 @@ public class TreasureHunter : MonoBehaviour
     }
     if(Input.GetMouseButtonUp(0)){
 
-        RaycastHit outHit;
+
+            RaycastHit outHit;
             if (Physics.Raycast(aerialViewCam.transform.position, aerialViewCam.transform.forward, out outHit, 100.0f)){
 
-            pickedUpObject=outHit.collider.gameObject;   
+            pickedUpObject=outHit.collider.gameObject;  
 
-            //pickedUpObject.GetComponent<AudioSource>().Stop();
 
-            if(pickedUpObject.tag == "Key"){
-
-            //Destroy(pickedUpObject);
+            if(key != null && key.tag == "Key"){
             
-
-            Vector3 newpos = pickedUpObject.transform.position;
-            print("key:" + pickedUpObject);
+            Vector3 newpos = key.transform.position;
+            print("key:" + key);
             newpos.y += .2f; // why does this work while 'transform.position.x += 5.0f;' doesn't?
-            pickedUpObject.transform.position = newpos;
+            key.transform.position = newpos;
 
-            }
+            key=null;
 
-        }
+            }}
+
+        
     }
 
         
